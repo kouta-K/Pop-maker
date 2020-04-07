@@ -1,0 +1,7 @@
+<%= link_to "Top", root_path %>
+<% if current_user %>
+    <%= link_to "logout", logout_path, method: :delete %>
+<% else %>
+    <%= link_to "login", "#", id: "login" %>
+    <%= link_to "signup", "#", id: "signup" %>
+<% end %>
