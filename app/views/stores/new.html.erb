@@ -1,0 +1,16 @@
+<h1>商品の登録</h1>
+<%= form_with(model: @store, local: true) do |f| %>
+  <%= f.label :name, "商品名" %>
+  <%= f.text_field :name %>
+  
+  <%= f.label :price, "値段" %>
+  <%= f.text_field :price %>
+  
+  <%= f.label :maker, "メーカー" %> 
+  <%= f.text_field :maker %>
+  
+  <%= f.label :category %>
+  <%= f.select :category, {食品: "食品", 惣菜: "惣菜", 菓子: "菓子", 飲料: "飲料", 野菜: "野菜", 鮮魚: "鮮魚", 精肉: "精肉"} %>
+  
+  <%= f.submit "登録" %>
+<% end %>
