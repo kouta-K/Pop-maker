@@ -1,0 +1,50 @@
+<h1>商品一覧</h1>
+<div id="stores">
+  <div class="store_title">
+    <span>商品名</span>
+    <span>値段</span>
+    <span>メーカー</span>
+    <span>カテゴリー</span>
+    <span>アクション１</span>
+    <span>アクション２</span>
+  </div>
+  <% @stores.each do |store| %>
+    <div class="store_content">
+      <span><%= store.name %></span>
+      <span><%= store.price %></span>
+      <span><%= store.maker %></span>
+      <span><%= store.category %></span>
+      <span><button class="store_edit_btn">編集</button></span>
+      <span><%= link_to "削除", store, method: :delete %></span>
+    </div>
+    <div class="store_edit" style="display: none;">
+      <%= form_with(model: store, local: true) do |f| %>
+        <span class="store_close">×</span>
+        <%= f.label :name, "商品名" %>
+        <%= f.text_field :name %>
+        
+        <%= f.label :price, "値段" %>
+        <%= f.text_field :price %>
+        
+        <%= f.label :maker, "メーカー" %> 
+        <%= f.text_field :maker %>
+        
+        <%= f.label :category %>
+        <%= f.select :category, {食品: "食品", 惣菜: "惣菜", 菓子: "菓子", 飲料: "飲料", 野菜: "野菜", 鮮魚: "鮮魚", 精肉: "精肉"} %>
+        
+        <%= f.submit "編集" %>
+      <% end %>
+    </div>
+  <% end %>
+</div>
+  
+<script>
+  $(function(){
+      $(".store_edit_btn").on('click', function(){
+        $(this).parent().parent().next().show();
+      });
+      $(".store_close").on('click', function(){
+        $(this).parent().parent().hide();
+      });
+  });
+</script>
