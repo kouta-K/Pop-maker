@@ -2,6 +2,7 @@ class StoresController < ApplicationController
   before_action :require_login
   def index 
     @stores = Store.all
+    
   end 
   def new
     @store = Store.new
@@ -39,8 +40,9 @@ class StoresController < ApplicationController
     end
     
   end
-  
-  def store_params
-    params.require(:store).permit(:name, :price, :maker, :category)
-  end
+  private
+    def store_params
+      params.require(:store).permit(:name, :price, :maker, :category)
+    end
+    
 end

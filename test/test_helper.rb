@@ -18,4 +18,13 @@ class ActionDispatch::IntegrationTest
   def log_in(user)
     post login_path, params: {session: {email: user.email, password: "password"}}
   end
+  
+  def which_week(week)
+    stores= []
+    weeks = Week.where(week: week)
+    weeks.each do |week| 
+      stores.append(week.store)
+    end 
+    return stores
+  end 
 end

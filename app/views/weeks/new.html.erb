@@ -1,0 +1,43 @@
+<div> 
+  <%= form_with(model: @week, local: true) do |f| %>
+    <%= f.select :week, {月曜: "月曜", 火曜: "火曜", 水曜: "水曜", 木曜: "木曜", 金曜: "金曜", 土曜: "土曜", 日曜: "日曜"} %>
+    <div id="ajax">
+      <% @stores.each do |store| %>
+        <div><%= f.check_box :store, {multiple: true}, store.id, nil %><%= store.name %> <%= store.price %>円 <%= store.maker %></div>
+      <% end %>
+    </div>
+    <%= f.submit "登録" %>
+  <% end %>
+</div> 
+
+
+<script>
+  $(function(){
+    $("#week_week").on("change", function(){
+    
+      $.ajax({
+            url: "/weeks/week_ajax",
+            type: "GET",
+            data: {week : $(":selected").attr("value")},
+            dataType: "json"
+        }).done(function(data) {
+          var html = buildHTML(data);
+          document.getElementById("ajax").innerHTML=html;
+        })
+        .fail(function() {
+          alert('error');
+        });
+    });
+    
+    function buildHTML(data){
+      var content = data["content"];
+      var input = "";
+      content.forEach(function(value){
+        input += `<div><input type="checkbox" value="${value.id}" name="week[store][]" id="week_store_${value.id}">${value.name} ${value.price} ${value.maker}</div>`
+      });
+      return input
+    }
+    
+    
+  });
+</script>

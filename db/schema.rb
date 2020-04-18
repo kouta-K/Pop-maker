@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_04_10_141702) do
+ActiveRecord::Schema.define(version: 2020_04_16_103454) do
 
   create_table "stores", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name"
@@ -29,4 +29,13 @@ ActiveRecord::Schema.define(version: 2020_04_10_141702) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "weeks", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.bigint "store_id"
+    t.string "week"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["store_id"], name: "index_weeks_on_store_id"
+  end
+
+  add_foreign_key "weeks", "stores"
 end

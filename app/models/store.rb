@@ -3,4 +3,5 @@ class Store < ApplicationRecord
   validates :price, presence: true, numericality: true
   validates :maker, presence: true
   validates :category, presence: true
+  has_many :weeks, dependent: :destroy
 end

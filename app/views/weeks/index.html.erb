@@ -1,0 +1,59 @@
+<div id="index_weeks">
+  <div>
+    <ul class="week_tabs">
+      <li><a href="#monday_store">月曜</a></li>
+      <li><a href="#tuesday_store">火曜</a></li>
+      <li><a href="#wednesday_store">水曜</a></li>
+      <li><a href="#thursday_store">木曜</a></li>
+      <li><a href="#friday_store">金曜</a></li>
+      <li><a href="#saturday_store">土曜</a></li>
+      <li><a href="#sunday_store">日曜</a></li>
+    </ul>
+  </div>
+  <div>
+    <div class="week_tab" id="monday_store">
+      <%= render "weeks/week_stores", object: @storeMon %>
+    </div>
+    <div class="week_tab" id="tuesday_store">
+      <%= render "weeks/week_stores", object: @storeTue %>
+    </div>
+    <div class="week_tab" id="wednesday_store">
+      <%= render "weeks/week_stores", object: @storeWen %>
+    </div>
+    <div class="week_tab" id="thursday_store">
+      <%= render "weeks/week_stores", object: @storeThu %>
+    </div>
+    <div class="week_tab" id="friday_store">
+      <%= render "weeks/week_stores", object: @storeFri %>
+    </div>
+    <div class="week_tab" id="saturday_store">
+      <%= render "weeks/week_stores", object: @storeSat %>
+    </div>
+    <div class="week_tab" id="sunday_store">
+      <%= render "weeks/week_stores", object: @storeSun %>
+    </div>
+  </div>
+</div>
+<script>
+  $("#index_weeks").each(function(){
+        var $tabsAnchor = $(this).find(".week_tabs a");
+        var $tabList = $(this).find(".week_tabs");
+        var $tabPanel = $(this).find(".week_tab");
+        var $li = $tabList.find("li")
+        $tabList.on("click", "a", function(event){
+          event.preventDefault();
+          var $this = $(this);
+          if($this.hasClass("active")){
+            return;
+          }
+          
+          $tabsAnchor.removeClass("active");
+          $this.addClass("active");
+          $li.removeClass("active_parent")
+          $this.parent().addClass("active_parent")
+          $tabPanel.hide();
+          $($this.attr("href")).show();
+          });
+        $tabsAnchor.eq(0).trigger("click");
+    });
+</script>

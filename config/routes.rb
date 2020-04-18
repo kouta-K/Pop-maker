@@ -4,4 +4,9 @@ Rails.application.routes.draw do
   delete "/logout", to: "sessions#destroy"
   resources :users
   resources :stores
+  resources :weeks do
+    collection do
+      get :week_ajax
+    end
+  end
 end

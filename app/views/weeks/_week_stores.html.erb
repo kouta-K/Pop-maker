@@ -1,0 +1,14 @@
+<div class="week_stores">
+  <% unless object.empty? %>
+    <% object.each do |store| %>
+     <div class="week_store_content">
+       <span><%= store.name %></span>
+       <span><%= store.price %></span>
+       <span><%= store.maker %></span>
+       <span><%= store.category %></span>
+     </div>
+    <% end %>
+  <% else %>
+    <p>商品は登録されていません</p>
+  <% end %>
+</div>

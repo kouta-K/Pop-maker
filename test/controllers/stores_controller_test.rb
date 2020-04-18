@@ -20,7 +20,7 @@ class StoresControllerTest < ActionDispatch::IntegrationTest
   test "should be redirect_to root url when no login" do
     post stores_path, params: {store: {name: "コーラ", price: 120, maker: "ペプシ", category: "食品"}}
     assert_redirected_to root_url
-    assert_not flash[:danger]
+    assert flash[:danger]
     follow_redirect!
     assert_template "toppages/index"
   end
@@ -31,6 +31,13 @@ class StoresControllerTest < ActionDispatch::IntegrationTest
       delete store_path(@store)
     end
     assert_redirected_to stores_url
+  end
+  
+  test "should delet relational week data when delete store data" do
+    log_in(@user)
+    assert_difference "Week.count", -1 do
+      delete store_path(@store)
+    end
   end
   
   test "shoud be redirect_to root url when not login" do
@@ -53,7 +60,7 @@ class StoresControllerTest < ActionDispatch::IntegrationTest
   
   test "con not edit store when not login" do
     patch store_path(@store), params: {store: {name: "ポテチ", price: 120, maker: "湖池屋", category: "食品"}}
-    assert_not flash[:danger]
+    assert flash[:danger]
     assert_redirected_to root_url
   end
 end

@@ -1,5 +1,14 @@
 store1:
+  id: 1
   name: cola
   price: 120
   maker: pepsi
   category: 食品
+
+store2:
+  id: 2
+  name: ポテトチップス
+  price: 100
+  maker: カルビー
+  category: 菓子
+  
