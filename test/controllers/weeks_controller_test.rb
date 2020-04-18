@@ -7,6 +7,7 @@ class WeeksControllerTest < ActionDispatch::IntegrationTest
     @store2 = stores(:store2)
   end 
   
+  
   test "should be redirect_to root url when week store registration is successful" do
     log_in(@user)
     assert_difference "Week.count", 1 do
