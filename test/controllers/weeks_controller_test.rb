@@ -50,5 +50,10 @@ class WeeksControllerTest < ActionDispatch::IntegrationTest
     assert flash[:danger]
   end
   
+  test "should be return store when get ajax  " do
+    log_in(@user)
+    get new_week_path, params: {week: "火曜"}, xhr: true
+    assert_match "cola", response.body
+  end
 end
 

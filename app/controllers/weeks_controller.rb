@@ -18,6 +18,10 @@ class WeeksController < ApplicationController
     week = params[:week] || "月曜"
     exclude_week(week)
     @week = Week.new
+    respond_to do |format|
+      format.html
+      format.json                        
+    end
   end
   
   def create

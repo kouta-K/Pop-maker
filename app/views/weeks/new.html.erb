@@ -16,11 +16,12 @@
     $("#week_week").on("change", function(){
     
       $.ajax({
-            url: "/weeks/week_ajax",
+            url: "/weeks/new",
             type: "GET",
             data: {week : $(":selected").attr("value")},
             dataType: "json"
         }).done(function(data) {
+          console.log(data);
           var html = buildHTML(data);
           document.getElementById("ajax").innerHTML=html;
         })
