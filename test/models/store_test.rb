@@ -2,7 +2,7 @@ require 'test_helper'
 
 class StoreTest < ActiveSupport::TestCase
   def setup 
-    @store = Store.new(name: "コーラ", price: 120, category: "飲料", maker: "ペプシ")
+    @store = Store.new(name: "コーラ", price: 120, category: "飲料", maker: "ペプシ", jan: "4901870300015")
   end 
   
   test "should be precense name" do
@@ -36,6 +36,10 @@ class StoreTest < ActiveSupport::TestCase
     @store.price = "123"
     assert_equal @store.price, 123
     assert_not_equal @store.price, "123"
-    
+  end
+  
+  test "it is invalid when jan is not uniqueness" do
+    @store = Store.new(name: "サイダー", price: 120, category: "飲料", maker: "ペプシ", jan: "4902074010625")
+    assert_not @store.valid?
   end
 end

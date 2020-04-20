@@ -56,5 +56,12 @@ class WeeksControllerTest < ActionDispatch::IntegrationTest
     get new_week_path, params: {week: "火曜"}, xhr: true
     assert_match "cola", response.body
   end
+  
+  test "return weeks/pop when click pop" do
+    log_in(@user)
+    get pop_weeks_path
+    assert_template "weeks/pop"
+  end
+ 
 end
 

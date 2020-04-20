@@ -33,12 +33,11 @@ class WeeksController < ApplicationController
     redirect_to weeks_url
   end
   
-  def week_ajax
-    week = params[:week]
-    exclude_week(week)
+  def pop
+    @stores = which_week(params[:week])
     respond_to do |format|
-      format.html { redirect_to new_week_path(@week) }
-      format.json                        
+      format.html
+      format.json
     end
   end
   

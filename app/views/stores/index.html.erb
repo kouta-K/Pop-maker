@@ -32,6 +32,9 @@
         <%= f.label :category %>
         <%= f.select :category, {食品: "食品", 惣菜: "惣菜", 菓子: "菓子", 飲料: "飲料", 野菜: "野菜", 鮮魚: "鮮魚", 精肉: "精肉"} %>
         
+        <%= f.label :jan, "jan" %>
+        <%= f.text_field :jan %>
+        
         <%= f.submit "編集" %>
       <% end %>
     </div>

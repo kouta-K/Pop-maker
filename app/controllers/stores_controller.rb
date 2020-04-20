@@ -1,5 +1,6 @@
 class StoresController < ApplicationController
   before_action :require_login
+  before_action :jan_correct, only: [:create, :update]
   def index 
     @stores = Store.all
     
@@ -24,7 +25,7 @@ class StoresController < ApplicationController
     @store = Store.new(store_params)
     if @store.save 
       flash[:success] = "登録完了"
-      redirect_to current_user
+      redirect_to new_store_path
     else
       flash.now[:danger] = "登録失敗"
       render "stores/new"
@@ -42,7 +43,21 @@ class StoresController < ApplicationController
   end
   private
     def store_params
-      params.require(:store).permit(:name, :price, :maker, :category)
+      params.require(:store).permit(:name, :price, :maker, :category, :jan)
+    end
+    
+    def jan_correct 
+      params_jan = params[:store][:jan]
+      if params_jan.nil? || params_jan == ""
+        flash[:danger] = "無効なJANコードです!"
+        redirect_to new_store_path
+      else
+        jan = Jan::Code.new(params_jan)
+        unless jan.valid?
+          flash[:danger] = "無効なJANコードです"
+          redirect_to new_store_path
+        end 
+      end
     end
     
 end

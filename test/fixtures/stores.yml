@@ -4,6 +4,7 @@ store1:
   price: 120
   maker: pepsi
   category: 食品
+  jan: "4902074010625" #ライフガード
 
 store2:
   id: 2
@@ -11,4 +12,5 @@ store2:
   price: 100
   maker: カルビー
   category: 菓子
+  jan: "4897036690017" #モンスター
   

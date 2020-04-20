@@ -10,15 +10,15 @@ class StoresControllerTest < ActionDispatch::IntegrationTest
     log_in(@user)
     get new_store_path
     assert_template "stores/new"
-    post stores_path, params: {store: {name: "コーラ", price: 120, maker: "ペプシ", category: "食品"}}
-    assert_redirected_to @user
+    post stores_path, params: {store: {name: "コーラ", price: 120, maker: "ペプシ", category: "食品", jan: "4901870300015"}}
+    assert_redirected_to new_store_path
     assert flash[:success]
     follow_redirect!
-    assert_template "users/show"
+    assert_template "stores/new"
   end
   
   test "should be redirect_to root url when no login" do
-    post stores_path, params: {store: {name: "コーラ", price: 120, maker: "ペプシ", category: "食品"}}
+    post stores_path, params: {store: {name: "コーラ", price: 120, maker: "ペプシ", category: "食品", jan: "4901870300015"}}
     assert_redirected_to root_url
     assert flash[:danger]
     follow_redirect!
@@ -50,7 +50,7 @@ class StoresControllerTest < ActionDispatch::IntegrationTest
   
   test "should be redirect_to stores index when edit successful" do
     log_in(@user)
-    patch store_path(@store), params: {store: {name: "ポテチ", price: 120, maker: "湖池屋", category: "食品"}}
+    patch store_path(@store), params: {store: {name: "ポテチ", price: 120, maker: "湖池屋", category: "食品", jan: "4901870300015"}}
     assert_redirected_to stores_url
     follow_redirect!
     @store.reload
@@ -62,5 +62,16 @@ class StoresControllerTest < ActionDispatch::IntegrationTest
     patch store_path(@store), params: {store: {name: "ポテチ", price: 120, maker: "湖池屋", category: "食品"}}
     assert flash[:danger]
     assert_redirected_to root_url
+  end
+  
+  test "return new_store_path when invalid jan" do
+    log_in(@user)
+    assert_no_difference "Store.count" do
+      post stores_path, params: {store: {name: "コーラ", price: 120, maker: "ペプシ", category: "食品", jan: "11"}}
+    end
+    assert_redirected_to new_store_path
+    assert flash[:danger]
+    follow_redirect!
+    assert_template "stores/new"
   end
 end

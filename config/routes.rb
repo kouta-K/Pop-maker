@@ -6,7 +6,7 @@ Rails.application.routes.draw do
   resources :stores
   resources :weeks do
     collection do
-      get :week_ajax
+      get :pop
     end
   end
 end

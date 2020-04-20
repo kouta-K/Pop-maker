@@ -23,3 +23,79 @@
 .active_parent{
   background-color: lightblue;
 }
+
+
+/*ポップ表示画面*/
+.pop{
+  width: 850px;
+  height: 490px;
+  margin-bottom: 20px;
+  display: grid;
+  grid-template-rows: 90px 150px 250px;
+  border: 1px solid black;
+  padding: 3px;
+}
+
+.pop_msg{
+  color: red;
+  margin: 0;
+  font-size: 70px;
+  text-align: center;
+  border-bottom: 3px red solid;
+  font-weight: 900;
+  letter-spacing: 50px;
+}
+.pop_name_maker{
+  display: grid;
+  grid-template-columns: 25% 75%;
+  .pop_maker{
+    display: flex;
+  	align-items: center;
+    justify-content: center;
+    font-size: 35px;
+    margin: 0;
+    font-weight: 700;
+  }
+  
+  .pop_name{
+    text-align: center;
+    font-size: 90px;
+    margin: 0;
+    font-weight: 900;
+  }
+
+}
+
+.pop_info{
+  display: grid;
+  grid-template-columns: 25% 75%;
+  
+  p{
+    margin: 0;
+    font-size: 40px;
+  }
+  .pop_jan{
+    margin: 0 auto;
+  }
+  .pop_price_msg{
+    border: red solid 1px;
+    color: red;
+    margin-left: 5px;
+    text-align: center;
+  }
+  .pop_amount, .pop_special_price{
+    text-align: center;
+  }
+  
+  .pop_price{
+    font-size: 230px;
+    height: 250px;
+    line-height: 230px;
+    color: red;
+    font-weight: bold;
+    letter-spacing: -10px;
+  }
+}
+
+
+

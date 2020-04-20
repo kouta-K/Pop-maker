@@ -88,6 +88,8 @@ GEM
     i18n (1.8.2)
       concurrent-ruby (~> 1.0)
     io-like (0.3.1)
+    jan (0.2.4)
+      builder
     jbuilder (2.10.0)
       activesupport (>= 5.0.0)
     jquery-rails (4.3.1)
@@ -229,6 +231,7 @@ DEPENDENCIES
   chromedriver-helper
   coffee-rails (~> 4.2)
   factory_bot_rails
+  jan
   jbuilder (~> 2.5)
   jquery-rails
   listen (>= 3.0.5, < 3.2)
