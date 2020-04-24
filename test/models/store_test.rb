@@ -42,4 +42,9 @@ class StoreTest < ActiveSupport::TestCase
     @store = Store.new(name: "サイダー", price: 120, category: "飲料", maker: "ペプシ", jan: "4902074010625")
     assert_not @store.valid?
   end
+  
+  test "jan is invalid when jan is too shorter" do
+    jan = Jan::Code.new("1234")
+    assert_not jan.valid?
+  end
 end

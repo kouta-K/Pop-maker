@@ -4,7 +4,7 @@
     <%= link_to "商品一覧", stores_path %>
     <%= link_to "商品を曜日に登録", new_week_path %>
     <%= link_to "曜日ごとの商品", weeks_path %>
-    <%= link_to "pop", pop_weeks_path %>
+    <%= link_to "pdf", pdf_weeks_path(week: "月曜", format: "pdf"), target: "_blank" %>
     <%= link_to "logout", logout_path, method: :delete %>
 <% else %>
     <%= link_to "login", "#", id: "login" %>

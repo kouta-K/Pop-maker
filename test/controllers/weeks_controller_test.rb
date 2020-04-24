@@ -57,11 +57,19 @@ class WeeksControllerTest < ActionDispatch::IntegrationTest
     assert_match "cola", response.body
   end
   
-  test "return weeks/pop when click pop" do
+  
+  test "should be return moday stoers" do
     log_in(@user)
-    get pop_weeks_path
-    assert_template "weeks/pop"
+    get pdf_weeks_path(week: "月曜日")
+    assert_template "weeks/pdf"
   end
- 
+  
+  test "should be week's stores when access weeks/index" do
+    log_in(@user) 
+    get weeks_path
+    assert_template "weeks/index"
+    assert_select "a[href=?]", pdf_weeks_path(week: "月曜", format: :pdf)
+    assert_match "cola", response.body
+  end
 end
 

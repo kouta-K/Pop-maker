@@ -33,13 +33,20 @@ class WeeksController < ApplicationController
     redirect_to weeks_url
   end
   
-  def pop
+  
+  def pdf 
     @stores = which_week(params[:week])
+    @jans = jan_codes(@stores)
     respond_to do |format|
       format.html
-      format.json
+      format.pdf do
+        render pdf: "sample",   # PDF名
+               template: "weeks/pdf.html.erb",
+               encoding: "UTF-8",
+               page_size: "A4"
+      end
     end
-  end
+  end 
   
   private 
     def exit_params 
@@ -79,5 +86,13 @@ class WeeksController < ApplicationController
     def exclude_week(week)
       store = which_week(week)#与えられた曜日に登録された商品
       @stores = Store.all - store
+    end
+    
+    def jan_codes(stores)
+      jans = []
+      stores.each do |store|
+        jans.append(store.jan)
+      end 
+      return jans
     end
 end

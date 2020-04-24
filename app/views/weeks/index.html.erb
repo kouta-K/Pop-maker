@@ -12,25 +12,25 @@
   </div>
   <div>
     <div class="week_tab" id="monday_store">
-      <%= render "weeks/week_stores", object: @storeMon %>
+      <%= render "weeks/week_stores", {object: @storeMon, week: "月曜"} %>
     </div>
     <div class="week_tab" id="tuesday_store">
-      <%= render "weeks/week_stores", object: @storeTue %>
+      <%= render "weeks/week_stores", {object: @storeTue, week: "火曜"} %>
     </div>
     <div class="week_tab" id="wednesday_store">
-      <%= render "weeks/week_stores", object: @storeWen %>
+      <%= render "weeks/week_stores", {object: @storeWen, week: "水曜"} %>
     </div>
     <div class="week_tab" id="thursday_store">
-      <%= render "weeks/week_stores", object: @storeThu %>
+      <%= render "weeks/week_stores", {object: @storeThu, week: "木曜"} %>
     </div>
     <div class="week_tab" id="friday_store">
-      <%= render "weeks/week_stores", object: @storeFri %>
+      <%= render "weeks/week_stores", {object: @storeFri, week: "金曜"} %>
     </div>
     <div class="week_tab" id="saturday_store">
-      <%= render "weeks/week_stores", object: @storeSat %>
+      <%= render "weeks/week_stores", {object: @storeSat, week: "土曜"} %>
     </div>
     <div class="week_tab" id="sunday_store">
-      <%= render "weeks/week_stores", object: @storeSun %>
+      <%= render "weeks/week_stores", {object: @storeSun, week: "日曜"} %>
     </div>
   </div>
 </div>

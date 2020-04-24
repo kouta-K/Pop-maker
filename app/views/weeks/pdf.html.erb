@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <%= wicked_pdf_javascript_include_tag "http://code.jquery.com/jquery-1.10.0.min.js" %>
+    <%= wicked_pdf_javascript_include_tag "jquery-barcode.js" %>
+    <%= wicked_pdf_stylesheet_link_tag "pdf.css" -%>
+  </head>
+  <body>
+    <% @stores.each do |store| %>  
+      <div class="pop">
+        <p class="pop_msg">広告の品</p>
+        <div class="pop_name_maker">
+          <p class="pop_maker"><%= store.maker %></p>
+          <p class="pop_name"><%= store.name %></p>
+        </div>
+        
+        <div class="A">
+          <div class="pop_info">
+            <p class="pop_price_msg">本体価格</p>
+            <p class="pop_amount"><容量></p>
+            <p class="pop_special_price">特価</p>
+            <div id="<%= store.jan %>" class="pop_jan"></div>
+          </div>
+          <p class="pop_price">
+            <%= store.price %>
+          </p>
+          <span class="yen" style="font-size: 50px">円<span>
+        </div>
+      </div>
+    <% end %>
+    <script>
+      $(function(){
+        var janCode;
+        var id;
+        <% @jans.each do |jan| %>
+          janCode = "<%= jan %>"
+          id = "#"+janCode
+          $(id).barcode(janCode, "ean13");
+        <% end %>
+        
+        $(".pop_name").each(function(){
+           var text = $(this).text();
+           if (text.length > 7){
+             $(this).css({"fontSize": "63px", "letterSpacing": "-10px"});
+           }else if(text.length > 19){
+             $(this).css({"fontSize": "50px", "letterSpacing": "-10px"});
+           }
+           
+        });
+        
+        $(".pop_price").each(function(){
+           var price = $(this).text();
+           if (price.length > 27){
+             $(this).css({"letterSpacing": "-35px"});
+           }else{
+             $(this).css({"fontSize": "300px"});
+           }
+        });
+        
+      });
+    </script>
+  </body>
+</html>

@@ -1,5 +1,6 @@
 <div class="week_stores">
   <% unless object.empty? %>
+    <%= link_to "pdf", pdf_weeks_path(week: week, format: "pdf"), target: "_blank" %>
     <% object.each do |store| %>
      <div class="week_store_content">
        <span><%= store.name %></span>
