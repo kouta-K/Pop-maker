@@ -23,11 +23,11 @@
         }).done(function(data) {
           var html = buildHTML(data);
           document.getElementById("ajax").innerHTML=html;
-          var id;
-          data["content"].forEach(function(value){
-            $id = "#" + value.jan;
-            $($id).barcode(value.jan, "ean13");
-          });
+          //var id;
+          //data["content"].forEach(function(value){
+          //  $id = "#" + value.jan;
+          //  $($id).barcode(value.jan, "ean13");
+          //});
         })
         .fail(function() {
           alert('error');
@@ -38,7 +38,7 @@
       var content = data["content"];
       var input = "";
       content.forEach(function(value){
-        input += `<div><input type="checkbox" value="${value.id}" name="week[store][]" id="week_store_${value.id}">${value.name} ${value.price} ${value.maker}</div>` + `<div id=${value.jan}>fa</div>` 
+        input += `<div><input type="checkbox" value="${value.id}" name="week[store][]" id="week_store_${value.id}">${value.name} ${value.price} ${value.maker} ${value.jan}</div>`
       });
       return input
     }
