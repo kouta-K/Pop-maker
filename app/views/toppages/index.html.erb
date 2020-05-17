@@ -1,9 +1,10 @@
 <div class="toppage">
-    <p>商品の管理をします</p>
+    <h2>ようこそポップメイカーへ</h2>
+    <div class="usages">
+      <p id="usage">作成手順</p>
+      <p>1, <%= link_to "商品を登録", new_store_path %></p>
+      <p>2, <%= link_to "登録した商品を特定の曜日に割り当てる", new_week_path %></p>
+      <p>3, <%= link_to "曜日ごとの商品一覧からPDFをクリック", weeks_path %></p>
+    </div>
 </div> 
-<script>
-$(function(){
-  
 
-});
-</script>

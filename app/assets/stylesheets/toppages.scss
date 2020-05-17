@@ -1,3 +1,29 @@
-// Place all the styles related to the toppages controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: http://sass-lang.com/
+.toppage{
+  h2{
+    text-align: center;
+  }
+  
+  .usages{
+    border: 1px solid black;
+    border-radius: 10px;
+    width: 420px;
+    position: absolute;
+    right: 0;
+    left: 0;
+    margin: auto;
+    
+    p{
+      padding: 10px;
+      font-size: 18px;
+    }
+    a{
+      color: black;
+    }
+  }
+}
+
+#usage{
+  text-align: center;
+  padding: 0px;
+  font-size: 20px;
+}
