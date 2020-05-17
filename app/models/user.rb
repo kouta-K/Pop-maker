@@ -1,6 +1,7 @@
 class User < ApplicationRecord
   before_save :downcase_email
   has_secure_password
+  has_many :stores
   validates :name, presence: true, length: {maximum: 30}
   validates :email, format: {with: /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i},
                     presence: true, uniqueness: {case_sensitive: false}

@@ -2,7 +2,7 @@ require 'test_helper'
 
 class StoreTest < ActiveSupport::TestCase
   def setup 
-    @store = Store.new(name: "コーラ", price: 120, category: "飲料", maker: "ペプシ", jan: "4901870300015")
+    @store = Store.new(name: "コーラ", price: 120, category: "飲料", maker: "ペプシ", jan: "4901870300015", user_id: 1)
   end 
   
   test "should be precense name" do

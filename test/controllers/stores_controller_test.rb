@@ -4,6 +4,7 @@ class StoresControllerTest < ActionDispatch::IntegrationTest
   def setup
     @user = users(:michael)
     @store = stores(:store1)
+    @store2 = stores(:store3)
   end
   
   test "should be redirect_to current_user when registration is successful" do
@@ -51,11 +52,19 @@ class StoresControllerTest < ActionDispatch::IntegrationTest
   test "should be redirect_to stores index when edit successful" do
     log_in(@user)
     patch store_path(@store), params: {store: {name: "ポテチ", price: 120, maker: "湖池屋", category: "食品", jan: "4901870300015"}}
+    assert_equal "編集しました", flash[:success]
     assert_redirected_to stores_url
     follow_redirect!
     @store.reload
     assert_equal "ポテチ", @store.name
     assert_template "stores/index"
+  end
+  
+  test "shoud be reder stores#index when other user edit store " do
+    log_in(@user)
+    patch store_path(@store2), params: {store: {name: "ポテチ", price: 120, maker: "湖池屋", category: "食品", jan: "4901870300015"}}
+    assert_equal "編集に失敗しました", flash[:danger]
+    assert_redirected_to root_url
   end
   
   test "con not edit store when not login" do
@@ -73,5 +82,13 @@ class StoresControllerTest < ActionDispatch::IntegrationTest
     assert flash[:danger]
     follow_redirect!
     assert_template "stores/new"
+  end
+  
+  test "should not print other registration store" do
+    log_in(@user)
+    get stores_path
+    assert_template "stores/index"
+    assert_match "ポテトチップス", response.body
+    assert_no_match "ビスケット", response.body
   end
 end

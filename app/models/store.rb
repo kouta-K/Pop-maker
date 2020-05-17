@@ -5,4 +5,5 @@ class Store < ApplicationRecord
   validates :category, presence: true
   validates :jan, presence: true, uniqueness: true
   has_many :weeks, dependent: :destroy
+  belongs_to :user
 end

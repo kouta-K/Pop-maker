@@ -1,28 +1,28 @@
 class StoresController < ApplicationController
   before_action :require_login
   before_action :jan_correct, only: [:create, :update]
+  before_action :correct_store, only: [:update]
   def index 
-    @stores = Store.all
-    
+    @stores = current_user.stores
   end 
+  
   def new
-    @store = Store.new
+    @store = current_user.stores.build()
   end
   
   def update
-    @store = Store.find(params[:id])
     if @store.update_attributes(store_params)
       flash[:success] = "編集しました"
       redirect_to stores_url
     else 
-      flash[:danger] = "編集に失敗にしました"
+      flash[:danger] = "編集に失敗しました"
       render "stores/index"
     end
     
   end
   
   def create
-    @store = Store.new(store_params)
+    @store = current_user.stores.build(store_params)
     if @store.save 
       flash[:success] = "登録完了"
       redirect_to new_store_path
@@ -59,5 +59,13 @@ class StoresController < ApplicationController
         end 
       end
     end
+    
+    def correct_store 
+      @store = Store.find(params[:id])
+      unless @store.user_id == current_user.id
+        flash[:danger] = "編集に失敗しました"
+        redirect_to root_url
+      end 
+    end 
     
 end

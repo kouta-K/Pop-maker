@@ -5,6 +5,7 @@ store1:
   maker: pepsi
   category: 食品
   jan: "4902074010625" #ライフガード
+  user_id: 1
 
 store2:
   id: 2
@@ -13,4 +14,13 @@ store2:
   maker: カルビー
   category: 菓子
   jan: "4897036690017" #モンスター
-  
+  user_id: 1
+
+store3:
+  id: 3
+  name: ビスケット
+  price: 120
+  maker: nissin
+  category: 菓子
+  jan: "4901620300845" 
+  user_id: 2
