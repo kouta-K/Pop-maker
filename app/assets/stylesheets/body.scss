@@ -1,0 +1,40 @@
+header{
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background-color: rgba(51, 153, 255, 0.9);
+  height: 80px;
+  #top{
+    text-decoration: none;
+    color: white;
+    font-size: 20px;
+    display: inline-block;
+    margin-top: 25px;
+    margin-bottom: 25px;
+    margin-left: 40px;
+  }
+  .link{
+      position: absolute;
+      right: 20px;
+    a{
+      text-decoration: none;
+      color: white;
+      font-size: 20px;
+      display: inline-block;
+      margin: 25px;
+    }
+  }
+}
+
+main{
+  position: relative;
+  min-height: calc(100vh-80px);
+  margin-top: 80px;
+}
+
+#signup, #login, #logout{
+  border: 1px solid white;
+  border-radius: 10px;
+  padding: 5px 8px;
+}

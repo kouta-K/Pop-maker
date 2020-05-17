@@ -1,11 +1,13 @@
-<%= link_to "Top", root_path %>
+<%= link_to "Top", root_path, id: "top" %>
+<span class="link">
 <% if current_user %>
     <%= link_to "商品登録", new_store_path %>
     <%= link_to "商品一覧", stores_path %>
     <%= link_to "商品を曜日に登録", new_week_path %>
     <%= link_to "曜日ごとの商品", weeks_path %>
-    <%= link_to "logout", logout_path, method: :delete %>
+    <%= link_to "logout", logout_path, method: :delete, id: "logout" %>
 <% else %>
     <%= link_to "login", "#", id: "login" %>
     <%= link_to "signup", "#", id: "signup" %>
 <% end %>
+</span>
