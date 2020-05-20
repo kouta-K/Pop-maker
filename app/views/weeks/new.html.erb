@@ -1,15 +1,31 @@
-<div> 
+<div id="new-week"> 
   <%= form_with(model: @week, local: true) do |f| %>
-    <%= f.select :week, {月曜: "月曜", 火曜: "火曜", 水曜: "水曜", 木曜: "木曜", 金曜: "金曜", 土曜: "土曜", 日曜: "日曜"} %>
+    <div class="week-select-btn">
+      <%= f.select :week, {月曜: "月曜", 火曜: "火曜", 水曜: "水曜", 木曜: "木曜", 金曜: "金曜", 土曜: "土曜", 日曜: "日曜"} %>
+      <button type="submit" class="new-week-btn">登録</button>
+    </div>
+    <div class="week-store-title">
+      <span>チェック</span>
+      <span>商品名</span>
+      <span>値段</span>
+      <span>メーカー</span>
+      <span>JANコード</span>
+      <span>カテゴリー</span>
+    </div>
     <div id="ajax">
       <% @stores.each do |store| %>
-        <div><%= f.check_box :store, {multiple: true}, store.id, nil %><%= store.name %> <%= store.price %>円 <%= store.maker %> <%= store.jan %></div>
+        <div class="week-forms">
+          <span><%= f.check_box :store, {multiple: true}, store.id, nil %></span>
+          <span><%= store.name %></span>
+          <span><%= store.price %></span>
+          <span><%= store.maker %></span>
+          <span><%= store.jan %></span>
+          <span><%= store.category %></span>
+        </div>
       <% end %>
     </div>
-    <%= f.submit "登録" %>
   <% end %>
-</div> 
-<div id="barcode" style="display: none;"></div>
+</div>
 
 <script>
   $(function(){
@@ -23,11 +39,6 @@
         }).done(function(data) {
           var html = buildHTML(data);
           document.getElementById("ajax").innerHTML=html;
-          //var id;
-          //data["content"].forEach(function(value){
-          //  $id = "#" + value.jan;
-          //  $($id).barcode(value.jan, "ean13");
-          //});
         })
         .fail(function() {
           alert('error');
@@ -38,11 +49,16 @@
       var content = data["content"];
       var input = "";
       content.forEach(function(value){
-        input += `<div><input type="checkbox" value="${value.id}" name="week[store][]" id="week_store_${value.id}">${value.name} ${value.price} ${value.maker} ${value.jan}</div>`
+        input += `<div class="week-forms">
+                    <span><input type="checkbox" value="${value.id}" name="week[store][]" id="week_store_${value.id}"></span>
+                    <span>${value.name}</span>
+                    <span>${value.price}</span>
+                    <span>${value.maker}</span> 
+                    <span>${value.jan}</span>
+                    <span>${value.category}</span>
+                  </div>`
       });
       return input
     }
-    
-    
   });
 </script>

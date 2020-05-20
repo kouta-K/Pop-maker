@@ -24,6 +24,82 @@
   background-color: lightblue;
 }
 
+#new-week{
+  padding-top: 30px;
+  .week-store-title{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+    span{
+      text-align: center;
+      border: black 1px solid;
+    }
+  }
+  
+  .week-forms{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+    span{
+      border-bottom: black 1px solid;
+      border-right: black 1px solid;
+      border-left: black 1px solid;
+      text-align: center;
+    }
+  }
+  .week-select-btn{
+    position: relative;
+    margin-bottom: 20px;
+  }
+  
+  select{
+    width: 80px;
+    font-size: 22px;
+  }
+  
+  .new-week-btn{
+    position: absolute;
+    right: 100px;
+    text-align: center;
+    padding: 5px 15px;
+    font-size: 20px;
+    border-radius: 5px;
+    background-color: rgba(51, 153, 255, 0.9);
+    color: white;
+    letter-spacing: 5px;
+  }
+}
 
+#index-week{
+  .index-week-title{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+    span{
+      text-align: center;
+      border: black 1px solid;
+    }
+  }
+  
+  .index-week-content{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+    span{
+      text-align: center;
+      border-bottom: black 1px solid;
+      border-right: black 1px solid;
+      border-left: black 1px solid;
+    }
+  }
+  
+  #pdf-btn{
+    display: inline-block;
+    background-color: rgba(51, 153, 255, 0.9);
+    padding:  5px 15px;
+    border-radius: 5px;
+    font-size: 20px;
+    text-decoration: none;
+    color: white;
+    margin-bottom: 10px;
+    margin-left: 10px;
+  }
+}
 
 

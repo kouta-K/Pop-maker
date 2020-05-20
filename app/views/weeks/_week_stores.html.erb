@@ -1,11 +1,19 @@
-<div class="week_stores">
+<div id="index-week">
   <% unless object.empty? %>
-    <%= link_to "pdf", pdf_weeks_path(week: week, format: "pdf"), target: "_blank" %>
+    <%= link_to "PDFを表示", pdf_weeks_path(week: week, format: "pdf"), target: "_blank", id: "pdf-btn" %>
+    <div class="index-week-title">
+      <span>商品名</span>
+      <span>値段</span>
+      <span>メーカー</span>
+      <span>JANコード</span>
+      <span>カテゴリー</span>
+    </div>
     <% object.each do |store| %>
-     <div class="week_store_content">
+     <div class="index-week-content">
        <span><%= store.name %></span>
        <span><%= store.price %></span>
        <span><%= store.maker %></span>
+       <span><%= store.jan %></span>
        <span><%= store.category %></span>
      </div>
     <% end %>

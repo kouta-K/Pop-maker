@@ -1,53 +1,64 @@
 <h1>商品一覧</h1>
 <div id="stores">
-  <div class="store_title">
+  <div class="store-title">
     <span>商品名</span>
     <span>値段</span>
     <span>メーカー</span>
+    <span>JANコード</span>
     <span>カテゴリー</span>
     <span>アクション１</span>
     <span>アクション２</span>
   </div>
   <% @stores.each do |store| %>
-    <div class="store_content">
-      <span><%= store.name %></span>
-      <span><%= store.price %></span>
-      <span><%= store.maker %></span>
-      <span><%= store.category %></span>
-      <span><button class="store_edit_btn">編集</button></span>
-      <span><%= link_to "削除", store, method: :delete %></span>
-    </div>
-    <div class="store_edit" style="display: none;">
-      <%= form_with(model: store, local: true, namespace: "#{store.id}") do |f| %>
-        <span class="store_close">×</span>
-        <%= f.label :name, "商品名" %>
-        <%= f.text_field :name %>
-        
-        <%= f.label :price, "値段" %>
-        <%= f.text_field :price %>
-        
-        <%= f.label :maker, "メーカー" %> 
-        <%= f.text_field :maker %>
-        
-        <%= f.label :category %>
-        <%= f.select :category, {食品: "食品", 惣菜: "惣菜", 菓子: "菓子", 飲料: "飲料", 野菜: "野菜", 鮮魚: "鮮魚", 精肉: "精肉"} %>
-        
-        <%= f.label :jan, "jan" %>
-        <%= f.text_field :jan %>
-        
-        <%= f.submit "編集" %>
-      <% end %>
+    <div class="store">
+      <div class="store-content">
+        <span><%= store.name %></span>
+        <span><%= store.price %></span>
+        <span><%= store.maker %></span>
+        <span><%= store.jan %></span>
+        <span><%= store.category %></span>
+        <span class="store-edit-btn">編集する</span>
+        <span><%= link_to "削除", store, method: :delete, data: {confirm: true} %></span>
+      </div>
+      <div class="store-edit" style="display: none;">
+        <%= form_with(model: store, local: true, namespace: "#{store.id}") do |f| %>
+          <div>
+            <%= f.text_field :name %>
+          </div>
+          
+          <div>
+            <%= f.text_field :price %>
+          </div>
+          
+          <div>
+            <%= f.text_field :maker %>
+          </div>
+          
+          <div>
+            <%= f.text_field :jan %>
+          </div>
+          
+          <div>
+            <%= f.select :category, {食品: "食品", 惣菜: "惣菜", 菓子: "菓子", 飲料: "飲料", 野菜: "野菜", 鮮魚: "鮮魚", 精肉: "精肉"} %>
+          </div>
+          <div>
+            <button type="submit" class="store-submit-btn">編集</button>
+          </div>
+          
+          <span><button type="button" class="store-close">×</button></span>
+        <% end %>
+      </div>
     </div>
   <% end %>
 </div>
   
 <script>
   $(function(){
-      $(".store_edit_btn").on('click', function(){
-        $(this).parent().parent().next().show();
+      $(".store-edit-btn").on('click', function(){
+        $(this).parent().next().show();
       });
-      $(".store_close").on('click', function(){
-        $(this).parent().parent().hide();
+      $(".store-close").on('click', function(){
+        $(this).parent().parent().parent().hide();
       });
   });
 </script>
