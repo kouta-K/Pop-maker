@@ -1,7 +1,7 @@
 class StoresController < ApplicationController
   before_action :require_login
   before_action :jan_correct, only: [:create, :update]
-  before_action :correct_store, only: [:update]
+  before_action :correct_store, only: [:update, :destroy]
   def index 
     @stores = current_user.stores
   end 
@@ -63,7 +63,7 @@ class StoresController < ApplicationController
     def correct_store 
       @store = Store.find(params[:id])
       unless @store.user_id == current_user.id
-        flash[:danger] = "編集に失敗しました"
+        flash[:danger] = "権限がありません"
         redirect_to root_url
       end 
     end 

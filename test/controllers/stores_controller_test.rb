@@ -48,6 +48,14 @@ class StoresControllerTest < ActionDispatch::IntegrationTest
     assert_redirected_to root_url
   end
   
+  test "should be redirect_to root url when other user delete store" do
+    log_in(@user)
+    assert_no_difference "Store.count" do
+      delete store_path(@store2)
+    end
+    assert_equal "権限がありません", flash[:danger]
+    assert_redirected_to root_url
+  end
   
   test "should be redirect_to stores index when edit successful" do
     log_in(@user)
@@ -63,7 +71,7 @@ class StoresControllerTest < ActionDispatch::IntegrationTest
   test "shoud be reder stores#index when other user edit store " do
     log_in(@user)
     patch store_path(@store2), params: {store: {name: "ポテチ", price: 120, maker: "湖池屋", category: "食品", jan: "4901870300015"}}
-    assert_equal "編集に失敗しました", flash[:danger]
+    assert_equal "権限がありません", flash[:danger]
     assert_redirected_to root_url
   end
   
