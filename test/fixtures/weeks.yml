@@ -2,7 +2,3 @@ one:
   id: 1
   store_id: 1
   week: 月曜
-two:
-  id: 2
-  store_id: 2
-  week: 火曜

@@ -3,6 +3,7 @@ class WeeksController < ApplicationController
   before_action :exit_params, only: [:create]
   before_action :correct_id, only: [:create]
   before_action :correct_week, only: [:create]
+  before_action :correct_user, only: [:destroy]
 
   def index 
     @storeMon = which_week("月曜")
@@ -33,6 +34,18 @@ class WeeksController < ApplicationController
     redirect_to weeks_url
   end
   
+  def destroy
+    week_name = @week.week
+    store_name = @week.store.name
+    if @week.destroy
+      flash[:success] = "#{week_name}から#{store_name}を削除しました"
+      redirect_to weeks_path
+    else 
+      flash[:danger] = "削除に失敗しました"
+      redirect_to weeks_path
+    end 
+  end 
+  
   
   def pdf 
     @stores = which_week(params[:week])
@@ -49,6 +62,14 @@ class WeeksController < ApplicationController
   end 
   
   private 
+    def correct_user
+       @week = Week.find(params[:id])
+       if current_user.id != @week.store.user.id
+         flash[:danger]  = "権限がありません"
+         redirect_to root_url
+       end 
+    end 
+    
     def exit_params 
       @store_ids = params[:week][:store]
       if @store_ids.nil?

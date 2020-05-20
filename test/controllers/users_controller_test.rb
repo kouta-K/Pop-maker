@@ -8,7 +8,7 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
     get root_path
     assert_template "toppages/index"
     assert_difference "User.count" do
-      post users_path, params: {user: {name: "test", email: "test2@co.jp", password: "password", password_confirmation: "password"}}
+      post users_path, params: {user: {name: "test", email: "test3@co.jp", password: "password", password_confirmation: "password"}}
     end
     assert flash[:success]
   end

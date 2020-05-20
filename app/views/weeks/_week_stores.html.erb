@@ -7,6 +7,7 @@
       <span>メーカー</span>
       <span>JANコード</span>
       <span>カテゴリー</span>
+      <span>曜日から削除</span>
     </div>
     <% object.each do |store| %>
      <div class="index-week-content">
@@ -15,6 +16,9 @@
        <span><%= store.maker %></span>
        <span><%= store.jan %></span>
        <span><%= store.category %></span>
+       <span>
+         <%= link_to "削除", Week.find_by(store_id: store.id, week: week), method: :delete %>
+       </span>
      </div>
     <% end %>
   <% else %>

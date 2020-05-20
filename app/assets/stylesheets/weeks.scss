@@ -71,7 +71,7 @@
 #index-week{
   .index-week-title{
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
     span{
       text-align: center;
       border: black 1px solid;
@@ -80,7 +80,7 @@
   
   .index-week-content{
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
     span{
       text-align: center;
       border-bottom: black 1px solid;

@@ -3,8 +3,10 @@ require 'test_helper'
 class WeeksControllerTest < ActionDispatch::IntegrationTest
   def setup 
     @user = users(:michael)
+    @user2 = users(:bob)
     @store1 = stores(:store1)
     @store2 = stores(:store2)
+    @week = weeks(:one)
   end 
   
   
@@ -70,6 +72,24 @@ class WeeksControllerTest < ActionDispatch::IntegrationTest
     assert_template "weeks/index"
     assert_select "a[href=?]", pdf_weeks_path(week: "月曜", format: :pdf)
     assert_match "cola", response.body
+  end
+  
+  test "should be redirect_to weeks/index when delete week column" do
+    log_in(@user)
+    assert_difference "Week.count", -1 do
+      delete week_path(@week)
+      assert_equal "月曜からcolaを削除しました", flash[:success]
+      assert_redirected_to weeks_url
+    end
+  end
+  
+  test "shoud be redirect_to root url when other user delete week column" do
+    log_in(@user2)
+    assert_no_difference "Week.count" do
+      delete week_path(@week)
+      assert_equal "権限がありません", flash[:danger]
+      assert_redirected_to root_url
+    end
   end
 end
 
