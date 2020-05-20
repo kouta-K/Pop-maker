@@ -67,7 +67,7 @@ class StoresControllerTest < ActionDispatch::IntegrationTest
     assert_redirected_to root_url
   end
   
-  test "con not edit store when not login" do
+  test "can not edit store when not login" do
     patch store_path(@store), params: {store: {name: "ポテチ", price: 120, maker: "湖池屋", category: "食品"}}
     assert flash[:danger]
     assert_redirected_to root_url
