@@ -1,7 +1,8 @@
 class StoresController < ApplicationController
   before_action :require_login
-  before_action :jan_correct, only: [:create, :update]
+  before_action :create_store, only: [:create]
   before_action :correct_store, only: [:update, :destroy]
+  before_action :jan_correct, only: [:create, :update]
   def index 
     @stores = current_user.stores
   end 
@@ -22,7 +23,6 @@ class StoresController < ApplicationController
   end
   
   def create
-    @store = current_user.stores.build(store_params)
     if @store.save 
       flash[:success] = "登録完了"
       redirect_to new_store_path
@@ -46,16 +46,20 @@ class StoresController < ApplicationController
       params.require(:store).permit(:name, :price, :maker, :category, :jan)
     end
     
+    def create_store
+      @store = current_user.stores.build(store_params)
+    end 
+    
     def jan_correct 
       params_jan = params[:store][:jan]
       if params_jan.nil? || params_jan == ""
-        flash[:danger] = "無効なJANコードです!"
-        redirect_to new_store_path
+        flash.now[:danger] = "無効なJANコードです!"
+        render "stores/new"
       else
         jan = Jan::Code.new(params_jan)
         unless jan.valid?
-          flash[:danger] = "無効なJANコードです"
-          redirect_to new_store_path
+          flash.now[:danger] = "無効なJANコードです"
+          render "stores/new"
         end 
       end
     end

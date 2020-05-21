@@ -81,14 +81,12 @@ class StoresControllerTest < ActionDispatch::IntegrationTest
     assert_redirected_to root_url
   end
   
-  test "return new_store_path when invalid jan" do
+  test "render stores/new when invalid jan" do
     log_in(@user)
     assert_no_difference "Store.count" do
       post stores_path, params: {store: {name: "コーラ", price: 120, maker: "ペプシ", category: "食品", jan: "11"}}
     end
-    assert_redirected_to new_store_path
     assert flash[:danger]
-    follow_redirect!
     assert_template "stores/new"
   end
   
