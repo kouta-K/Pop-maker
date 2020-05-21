@@ -1,0 +1,119 @@
+#login-form{
+  position: absolute;
+  width: 100%;
+  min-height: 100vh;
+  top: 0;
+  left: 0;
+  background-color: rgba(192, 192, 192, 0.5);
+  .login-modal{
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    margin: auto;
+    width: 500px;
+    height: 400px;
+    background-color: white;
+    border-radius: 10px;
+    border-color: black;
+    h2{
+      margin-top: 0;
+      margin-bottom: 40px;
+      text-align: center;
+    }
+    .login-close-div{
+      text-align: right;
+      #login-close{
+        font-size: 30px;
+        margin-right: 3px;
+      }
+    }
+    form{
+      display: grid;
+      grid-template-columns: 10% 80% 10%;
+      label, input, div{
+        grid-column: 2;
+      }
+      label{
+        font-size: 20px;
+      }
+      input{
+        margin-bottom: 30px;
+        height: 23px;
+        font-size: 20px;
+      }
+      div{
+        text-align: center;
+      }
+      #login-btn{
+        padding: 8px 13px;
+        border-radius: 5px;
+        font-size: 18px;
+        color: white;
+        background-color: rgba(51, 153, 255, 0.9);
+      }
+    }
+  }
+}
+
+#signup-form{
+  position: absolute;
+  width: 100%;
+  min-height: 100vh;
+  top: 0;
+  left: 0;
+  background-color: rgba(192, 192, 192, 0.5);
+  .signup-modal{
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    margin: auto;
+    width: 500px;
+    height: 560px;
+    background-color: white;
+    border-radius: 10px;
+    border-color: black;
+    h2{
+      margin-top: 0;
+      margin-bottom: 40px;
+      text-align: center;
+    }
+    .signup-close-div{
+      text-align: right;
+      #signup-close{
+        font-size: 30px;
+        margin-right: 3px;
+      }
+    }
+    form{
+      display: grid;
+      grid-template-columns: 10% 80% 10%;
+      label, input, div{
+        grid-column: 2;
+      }
+      label{
+        font-size: 20px;
+      }
+      input{
+        margin-bottom: 30px;
+        height: 23px;
+        font-size: 20px;
+      }
+      div{
+        text-align: center;
+      }
+      #signup-btn{
+        padding: 8px 13px;
+        border-radius: 5px;
+        font-size: 23px;
+        color: white;
+        background-color: rgba(51, 153, 255, 0.9);
+        letter-spacing: 4px;
+      }
+    }
+  }
+}
+
