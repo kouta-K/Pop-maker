@@ -68,12 +68,40 @@ class StoresControllerTest < ActionDispatch::IntegrationTest
     assert_template "stores/index"
   end
   
+  test "shoud be redirect_to stores#index when maker is empty" do
+    log_in(@user)
+    patch store_path(@store), params: {store: {name: "cola", price: 120, maker: "", category: "食品", jan: "4902074010625"}}
+    assert_equal "編集に失敗しました", flash[:danger]
+    assert_redirected_to stores_url
+  end
+  
+  test "shoud be redirect_to stores#index when nmae is empty" do
+    log_in(@user)
+    patch store_path(@store), params: {store: {name: "", price: 120, maker: "pepsi", category: "食品", jan: "4902074010625"}}
+    assert_equal "編集に失敗しました", flash[:danger]
+    assert_redirected_to stores_url
+  end
+  
+  test "shoud be redirect_to stores#index when price is empty" do
+    log_in(@user)
+    patch store_path(@store), params: {store: {name: "cola", price: nil, maker: "pepsi", category: "食品", jan: "4902074010625"}}
+    assert_equal "編集に失敗しました", flash[:danger]
+    assert_redirected_to stores_url
+  end
+  
   test "shoud be reder stores#index when other user edit store " do
     log_in(@user)
     patch store_path(@store2), params: {store: {name: "ポテチ", price: 120, maker: "湖池屋", category: "食品", jan: "4901870300015"}}
     assert_equal "権限がありません", flash[:danger]
     assert_redirected_to root_url
   end
+  
+  test "shoud be redirect_to stores#index when invalid jan" do
+    log_in(@user)
+    patch store_path(@store), params: {store: {name: "cola", price: 120, maker: "pepsi", category: "食品", jan: "000"}}
+    assert_equal "無効なJANコードです", flash[:danger]
+    assert_redirected_to stores_url
+  end 
   
   test "can not edit store when not login" do
     patch store_path(@store), params: {store: {name: "ポテチ", price: 120, maker: "湖池屋", category: "食品"}}

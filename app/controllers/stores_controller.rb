@@ -2,7 +2,8 @@ class StoresController < ApplicationController
   before_action :require_login
   before_action :create_store, only: [:create]
   before_action :correct_store, only: [:update, :destroy]
-  before_action :jan_correct, only: [:create, :update]
+  before_action :jan_correct_edit, only: [:update]
+  before_action :jan_correct, only: [:create]
   def index 
     @stores = current_user.stores
   end 
@@ -17,7 +18,7 @@ class StoresController < ApplicationController
       redirect_to stores_url
     else 
       flash[:danger] = "編集に失敗しました"
-      render "stores/index"
+      redirect_to stores_url
     end
     
   end
@@ -60,6 +61,20 @@ class StoresController < ApplicationController
         unless jan.valid?
           flash.now[:danger] = "無効なJANコードです"
           render "stores/new"
+        end 
+      end
+    end
+    
+    def jan_correct_edit
+      params_jan = params[:store][:jan]
+      if params_jan.nil? || params_jan == ""
+        flash[:danger] = "無効なJANコードです"
+        redirect_to stores_url
+      else
+        jan = Jan::Code.new(params_jan)
+        unless jan.valid?
+          flash[:danger] = "無効なJANコードです"
+          redirect_to stores_url
         end 
       end
     end
