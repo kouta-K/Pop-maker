@@ -6,7 +6,7 @@ class SessionsController < ApplicationController
     if @user && @user.authenticate(password)
       session[:user_id] = @user.id
       flash[:success] ="ログイン"
-      redirect_to @user
+      redirect_to root_url
     else 
       flash.now[:danger] ="失敗"
       render "toppages/index"

@@ -9,9 +9,9 @@ class SessionsControllerTest < ActionDispatch::IntegrationTest
     get root_path
     assert_template "toppages/index" 
     post login_path, params: {session: {email: @user.email, password: "password"}}
-    assert_redirected_to @user
+    assert_redirected_to root_url
     follow_redirect!
-    assert_template "users/show"
+    assert_template "toppages/index"
     assert flash[:success]
     assert_select "a[href=?]", logout_path
   end
@@ -28,7 +28,7 @@ class SessionsControllerTest < ActionDispatch::IntegrationTest
     get root_path
     log_in(@user)
     follow_redirect!
-    assert_template "users/show"
+    assert_template "toppages/index"
     delete logout_path
     assert_redirected_to root_url
     follow_redirect!
