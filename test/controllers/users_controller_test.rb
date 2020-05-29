@@ -10,6 +10,7 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
     assert_difference "User.count" do
       post users_path, params: {user: {name: "test", email: "test3@co.jp", password: "password", password_confirmation: "password"}}
     end
+    assert_redirected_to root_url
     assert flash[:success]
   end
   
@@ -22,15 +23,12 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
     assert flash[:danger]
   end
   
-  test "should be redirect_to root when no login" do
-    get user_path(@user.id)
-    assert_redirected_to root_url
-  end
   
-  test "should be redirect_to users/show when login" do
+  test "should be redirect_to root when login" do
     log_in(@user)
-    get user_path(@user)
-    assert_template "users/show"
+    assert_redirected_to root_url
+    follow_redirect!
+    assert_template "toppages/index"
   end
   
   
