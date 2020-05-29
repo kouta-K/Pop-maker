@@ -1,0 +1,23 @@
+#flash{
+  position: absolute;
+  top: 100px;
+  left: 0;
+  right: 0;
+  margin: auto;
+  width: 60%;
+  height: 30px;
+  border-radius: 5px;
+  font-size: 20px;
+  z-index: 999;
+}
+
+.danger{
+  background-color: rgb(255, 0, 0);
+  color: white;
+  text-align: center;
+}
+.success{
+  background-color: #c3ff99;
+  color: white;
+  text-align: center;
+}
