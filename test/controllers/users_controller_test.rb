@@ -10,6 +10,7 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
     assert_difference "User.count" do
       post users_path, params: {user: {name: "test", email: "test3@co.jp", password: "password", password_confirmation: "password"}}
     end
+    assert_not session[:user_id].nil?
     assert_redirected_to root_url
     assert flash[:success]
   end
