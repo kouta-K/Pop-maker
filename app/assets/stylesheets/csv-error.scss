@@ -1,0 +1,26 @@
+#csv-errors{
+  position: fixed;
+  height: fit-content;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  margin: auto;
+  width: 500px;
+  color: firebrick;
+  background-color: lightpink;
+  padding: 10px;
+  h2{
+    margin: 0;
+    text-align: center;
+  }
+}
+
+#csv-error-close{
+  text-align: right;
+}
+
+#csv-error-close-btn{
+  display: inline-block;
+  font-size: 24px;
+}

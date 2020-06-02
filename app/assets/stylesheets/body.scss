@@ -29,7 +29,7 @@ header{
 
 main{
   position: relative;
-  min-height: calc(100vh-80px);
+  min-height: calc(100vh - 80px);
   margin-top: 80px;
 }
 
@@ -37,4 +37,9 @@ main{
   border: 1px solid white;
   border-radius: 10px;
   padding: 5px 8px;
+}
+
+body{
+  margin-top: 0;
+  margin-bottom: 0;
 }

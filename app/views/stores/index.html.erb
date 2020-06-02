@@ -53,9 +53,13 @@
 </div>
 <% if flash[:errors] %>
   <div id="csv-errors">
+    <div id="csv-error-close"><span id="csv-error-close-btn">×</span></div>
+    <h2>以下の商品は登録されていません</h2>
+    <ol>
     <% flash[:errors].each do |e| %>
-      <div>商品名:<%= e["name"] %> JANコード: <%= e["jan"] %> エラー: <%= e["error"].join(" ") %></div>
+      <li>商品名:<%= e["name"] %> JANコード: <%= e["jan"] %> エラー: <%= e["error"].join(" ") %></li>
     <% end %>
+    </ol>
   </div>
 <% end %>
   
@@ -68,4 +72,11 @@
         $(this).parent().parent().parent().hide();
       });
   });
+</script>
+<script>
+  $(function(){
+    $("#csv-error-close-btn").on("click", function(){
+      $("#csv-errors").fadeOut(1000)
+    })
+  })
 </script>
