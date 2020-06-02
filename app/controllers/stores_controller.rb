@@ -33,6 +33,12 @@ class StoresController < ApplicationController
     end
   end
   
+  def import 
+    errors = Store.import(params[:file], current_user.id)
+    flash[:errors] = errors 
+    redirect_to stores_url
+  end 
+  
   def destroy
     @store = Store.find(params[:id])
     if @store.destroy

@@ -20,6 +20,13 @@
   <% end %>
 </div>  
 
+<div id="store-csv">
+  <%= form_tag import_stores_path, multipart: true do %>
+    <%= file_field_tag :file %>
+    <%= submit_tag "インポート" %>
+  <% end %>
+</div>
+
 <script>
   function errorMessage(ary){
     if(ary[0] && ary[1]){

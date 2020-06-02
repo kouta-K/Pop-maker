@@ -1,5 +1,7 @@
-<% flash.each do |type, message| %>
-    <div id="flash" class=<%= type %>><%= message %></div>
+<% unless flash[:errors] %>  
+  <% flash.each do |type, message| %>
+      <div id="flash" class=<%= type %>><%= message %></div>
+  <% end %>
 <% end %>
  
 

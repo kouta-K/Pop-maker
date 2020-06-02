@@ -51,6 +51,13 @@
     </div>
   <% end %>
 </div>
+<% if flash[:errors] %>
+  <div id="csv-errors">
+    <% flash[:errors].each do |e| %>
+      <div>商品名:<%= e["name"] %> JANコード: <%= e["jan"] %> エラー: <%= e["error"].join(" ") %></div>
+    <% end %>
+  </div>
+<% end %>
   
 <script>
   $(function(){

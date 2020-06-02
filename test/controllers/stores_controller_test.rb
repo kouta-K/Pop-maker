@@ -125,4 +125,15 @@ class StoresControllerTest < ActionDispatch::IntegrationTest
     assert_match "ポテトチップス", response.body
     assert_no_match "ビスケット", response.body
   end
+  
+  test "should redirect_to stores#index when register store on csv" do
+    file_path = File.join(Rails.root, 'test/csv_test.csv')
+    log_in(@user)
+    assert_difference "Store.count", 1 do 
+      post import_stores_path, params: {file: fixture_file_upload(file_path, 'text/csv')}
+    end 
+    assert flash[:errors]
+    assert_equal flash[:errors][0][:error][0], "無効なjanです"
+    assert_redirected_to stores_url
+  end
 end
