@@ -3,7 +3,7 @@ class Store < ApplicationRecord
   validates :price, presence: true, numericality: true
   validates :maker, presence: true
   validates :category, presence: true
-  validates :jan, presence: true, uniqueness: true
+  validates :jan, presence: true
   has_many :weeks, dependent: :destroy
   belongs_to :user
   

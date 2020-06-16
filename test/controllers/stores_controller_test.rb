@@ -126,8 +126,18 @@ class StoresControllerTest < ActionDispatch::IntegrationTest
     assert_no_match "ビスケット", response.body
   end
   
+  test "should be flash[:success] when all store is valid" do
+    file_path = File.join(Rails.root, 'test/csv_test_file/valid.csv')
+    log_in(@user)
+    assert_difference "Store.count", 2 do 
+      post import_stores_path, params: {file: fixture_file_upload(file_path, 'text/csv')}
+    end 
+    assert_equal "商品を登録しました", flash[:success]
+    assert_redirected_to stores_url
+  end
+  
   test "should redirect_to stores#index when register store on csv" do
-    file_path = File.join(Rails.root, 'test/csv_test.csv')
+    file_path = File.join(Rails.root, 'test/csv_test_file/csv_test.csv')
     log_in(@user)
     assert_difference "Store.count", 1 do 
       post import_stores_path, params: {file: fixture_file_upload(file_path, 'text/csv')}
@@ -135,5 +145,24 @@ class StoresControllerTest < ActionDispatch::IntegrationTest
     assert flash[:errors]
     assert_equal flash[:errors][0][:error][0], "無効なjanです"
     assert_redirected_to stores_url
+  end
+  
+  test "shoud redirect_to stores#new when file type is not csv" do
+    file_path = File.join(Rails.root, "test/csv_test_file/test.html")
+    log_in(@user)
+    assert_no_difference "Store.count" do 
+      post import_stores_path, params: {file: fixture_file_upload(file_path, 'text/html')}
+    end 
+    assert_equal "CSVファイルが選択されていません", flash[:danger]
+    assert_redirected_to new_store_path
+  end
+  
+  test "should redirect_to stores#new when file is not presence" do
+    log_in(@user)
+    assert_no_difference "Store.count" do 
+      post import_stores_path, params: {file: nil}
+    end 
+    assert_equal "CSVファイルが選択されていません", flash[:danger]
+    assert_redirected_to new_store_path
   end
 end

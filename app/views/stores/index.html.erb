@@ -51,7 +51,7 @@
     </div>
   <% end %>
 </div>
-<% if flash[:errors] %>
+<% if flash[:errors] && flash[:errors].any? %>
   <div id="csv-errors">
     <div id="csv-error-close"><span id="csv-error-close-btn">×</span></div>
     <h2>以下の商品は登録されていません</h2>

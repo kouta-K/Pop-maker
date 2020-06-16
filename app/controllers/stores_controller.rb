@@ -34,9 +34,18 @@ class StoresController < ApplicationController
   end
   
   def import 
-    errors = Store.import(params[:file], current_user.id)
-    flash[:errors] = errors 
-    redirect_to stores_url
+    if params[:file] && params[:file].content_type == "text/csv"
+      errors = Store.import(params[:file], current_user.id)
+      if errors.empty?
+        flash[:success] = "商品を登録しました"
+      else
+        flash[:errors] = errors 
+      end 
+      redirect_to stores_url
+    else 
+      flash[:danger] = "CSVファイルが選択されていません"
+      redirect_to new_store_path
+    end 
   end 
   
   def destroy
@@ -60,7 +69,7 @@ class StoresController < ApplicationController
     def jan_correct 
       params_jan = params[:store][:jan]
       if params_jan.nil? || params_jan == ""
-        flash.now[:danger] = "無効なJANコードです!"
+        flash.now[:danger] = "無効なJANコードです"
         render "stores/new"
       else
         jan = Jan::Code.new(params_jan)

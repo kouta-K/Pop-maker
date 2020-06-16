@@ -7,8 +7,11 @@
     display: grid;
     grid-template-columns: 30% 40% 30%;
   }
-  select, input, label{
+  select, input, label, .field_with_errors{
     grid-column: 2
+  }
+  input{
+    width: 100%;
   }
   input, select{
     height: 30px;
