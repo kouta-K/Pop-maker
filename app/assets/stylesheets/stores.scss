@@ -89,3 +89,49 @@
     }
   }
 }
+
+#store-csv{
+  position: absolute;
+  top: -80px;
+  left: 0;
+  width: 100%;
+  min-height: 100vh;
+  background-color: rgba(192, 192, 192, 0.5);
+  .csv-form{
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+    background-color: white;
+    width: 30%;
+    height: fit-content;
+    border-radius: 10px;
+    h3{
+      text-align: center;
+    }
+    form{
+      div{
+        margin: 15px;
+      }
+    }
+    #csv-attention{
+      margin-left: 15px;
+      color: red;
+    }
+    p{
+      margin: 15px;
+      border: 1px solid black;
+      border-radius: 5px;
+      padding: 4px;
+    }
+  }
+}
+
+.csv-btn-div{
+  text-align: center;
+  #csv-btn{
+    color: blue;
+  }
+}
