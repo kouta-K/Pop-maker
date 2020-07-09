@@ -5,11 +5,11 @@ RUN apt-get update -qq && \
                        libpq-dev \
                        nodejs
 
-RUN mkdir /myapp
+RUN mkdir /webapp
 
-WORKDIR /myapp
+WORKDIR /webapp
 
-ENV APP_ROOT /myapp
+ENV APP_ROOT /webapp
 
 COPY ./Gemfile $APP_ROOT/Gemfile
 
@@ -19,6 +19,7 @@ RUN bundle install
 
 COPY ./ APP_ROOT
 
-EXPOSE 3000
+# tmpファイルは.gitignoreに含まれているので作成する必要あり
+RUN mkdir -p tmp/sockets
 
 CMD ["rails", "s"]
